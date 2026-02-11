@@ -55,6 +55,10 @@
 
     .stage{
       position: relative;
+      .yes, .no { z-index: 5;
+      .pop { pointer-events: none;
+      /* 버튼이 다른 요소에 가려지지 않게 */
+
       height: 260px;
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.35);
@@ -237,8 +241,31 @@
     });
 
     yesBtn.addEventListener("click", () => {
+  // ✅ YES 버튼은 그대로, 클릭하면 사진 모달 뜨기
       pop.classList.add("show");
       toast.textContent = "오케이… 이제 너 내 발렌타인임 💘";
+
+  // ✅ 사진 모달
+      modalImg.src = "assets/valentine.jpg";
+      modal.style.display = "grid";
+      modal.setAttribute("aria-hidden", "false");
+
+  // ✅ 하트 이펙트(클릭 방해 안 하게 pointer-events 끄기)
+      const burst = document.createElement("div");
+      burst.textContent = "💗💗💗💗💗";
+      burst.style.position = "absolute";
+      burst.style.left = "50%";
+      burst.style.top = "78%";
+      burst.style.transform = "translate(-50%,-50%)";
+      burst.style.fontSize = "28px";
+      burst.style.animation = "floatUp 1.2s ease forwards";
+      burst.style.pointerEvents = "none";   // ⭐ 핵심
+      burst.style.zIndex = "1";             // 버튼(z-index 5)보다 아래
+      stage.appendChild(burst);
+      setTimeout(() => burst.remove(), 1400);
+    });
+
+    
 
       // 하트 이펙트
       const burst = document.createElement("div");
