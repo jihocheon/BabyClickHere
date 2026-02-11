@@ -197,6 +197,7 @@
       "당신께 드리는 마지막 기회!"
     ];
     let msgIdx = 0;
+    let yesScale = 1;
 
     function moveNoButton() {
       const rStage = stage.getBoundingClientRect();
@@ -215,6 +216,10 @@
 
       toast.textContent = messages[msgIdx % messages.length];
       msgIdx++;
+      yesScale += 0.08;                 // 커지는 속도
+      yesBtn.style.transform =
+        `translate(-140px,-50%) scale(${yesScale})`;
+
     }
 
     let armed = false;
